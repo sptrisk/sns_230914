@@ -4,9 +4,22 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface LikeMapper {
 	
 	public List<Map<String, Object>> selectLikeList();
+	
+	public int selectLikeCountByPostIdUserId(
+			@Param("postId") int postId,
+			@Param("userId") int userId);
+	
+	public void deleteLikeByPostIdUserId(
+			@Param("postId") int postId,
+			@Param("userId") int userId);
+	
+	public void insertLike(
+			@Param("postId") int postId,
+			@Param("userId") int userId);
 }
