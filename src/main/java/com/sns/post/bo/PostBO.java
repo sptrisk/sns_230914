@@ -1,5 +1,7 @@
 package com.sns.post.bo;
 
+
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,9 @@ import com.sns.common.FileManagerService;
 import com.sns.post.entity.PostEntity;
 import com.sns.post.repository.PostRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class PostBO {
 
@@ -41,4 +46,27 @@ public class PostBO {
 				.imagePath(imagePath)
 				.build());
 	}
+	
+	public void deletePostByPostId(int postId) {
+		
+		// 기존 글 가져오기
+		PostEntity post = postRepository.findById(postId).orElse(null);
+		if (post == null) {
+			log.info("[글 삭제] post is null. postId:{}, userId:{}", postId, userId);
+			return;
+		}		
+		
+		// 글 삭제
+		postRepository.delete(post);
+		
+		// 이미지 있으면 삭제
+		
+		
+		// 댓글들 삭제
+		
+		// 좋아요 삭제
+		
+	}
+	
+	
 }
